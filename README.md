@@ -7,5 +7,5 @@
 
 ### Project learning outcomes
 - Design classes to implement a graph in Java
-- Implement basic graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A* Search**.
+- Implement basic graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A\* Search**.
 - Work with real-world geographic road data
