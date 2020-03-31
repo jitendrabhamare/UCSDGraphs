@@ -9,7 +9,13 @@ package roadgraph;
 
 
 import java.util.List;
+import java.util.Map;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
@@ -24,7 +30,12 @@ import util.GraphLoader;
  */
 public class MapGraph {
 	//TODO: Add your member variables here in WEEK 3
-	
+	// -----------------------------------------------------
+	//			Member Variables
+	// -----------------------------------------------------
+	private Map<GeographicPoint, MapNode> intersections;
+	private int numVertices;
+	private int numEdges;
 	
 	/** 
 	 * Create a new empty MapGraph 
@@ -32,6 +43,9 @@ public class MapGraph {
 	public MapGraph()
 	{
 		// TODO: Implement in this constructor in WEEK 3
+		intersections = new HashMap<GeographicPoint, MapNode>();
+		numVertices = 0;
+		numEdges = 0;
 	}
 	
 	/**
@@ -41,7 +55,7 @@ public class MapGraph {
 	public int getNumVertices()
 	{
 		//TODO: Implement this method in WEEK 3
-		return 0;
+		return numVertices;
 	}
 	
 	/**
@@ -51,7 +65,8 @@ public class MapGraph {
 	public Set<GeographicPoint> getVertices()
 	{
 		//TODO: Implement this method in WEEK 3
-		return null;
+		
+		return intersections.keySet();
 	}
 	
 	/**
@@ -61,7 +76,7 @@ public class MapGraph {
 	public int getNumEdges()
 	{
 		//TODO: Implement this method in WEEK 3
-		return 0;
+		return numEdges;
 	}
 
 	
@@ -76,7 +91,19 @@ public class MapGraph {
 	public boolean addVertex(GeographicPoint location)
 	{
 		// TODO: Implement this method in WEEK 3
-		return false;
+		// return false if entry was not (the node
+		// was already in the graph, or the parameter is null
+		if (location == null || intersections.containsKey(location)) {
+			return false;		
+		}
+		
+		// Create a MapNode from a location and add it to the HashMap
+		MapNode intersection = new MapNode(location);
+		intersections.put(location, intersection);
+		// Increment numVertices count
+		//System.out.println("intersection: " + intersection + " is added!");
+		numVertices++;
+		return true;
 	}
 	
 	/**
@@ -95,9 +122,43 @@ public class MapGraph {
 			String roadType, double length) throws IllegalArgumentException {
 
 		//TODO: Implement this method in WEEK 3
+		//// Throwing Exceptions
+		// Check for null arguments and -ve length
 		
+		if (from == null || to == null || roadName == null || roadType == null || length < 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		// check if vertices not been already added
+		if (!intersections.containsKey(from) || !intersections.containsKey(to)) {
+			throw new IllegalArgumentException();
+		}
+		
+		// Create a MapEdge
+		MapEdge road = new MapEdge(from, to, roadName, roadType, length);
+		
+		// Add neighbors into neighbors list 
+		intersections.get(from).getNeighbors().add(intersections.get(to));
+		// Add MapEdge to the edge-list of start MapNode
+		intersections.get(from).getRoadList().add(road);		
+		
+		// Increment numEdges count
+		numEdges++;		
 	}
 	
+	/** Print MapGraph Attributes
+	 * @return s - information of MapGraph each intersection with
+	 * list of all it's edge info	  
+	 */
+	public void printGraph() {
+		for (GeographicPoint key: intersections.keySet()) {
+			System.out.println("vert: " + key);			
+			for (MapEdge e: intersections.get(key).getRoadList()) {
+				System.out.println(e);
+			}
+			System.out.println("\n\n");			
+		}
+	}
 
 	/** Find the path from start to goal using breadth first search
 	 * 
@@ -125,10 +186,83 @@ public class MapGraph {
 	{
 		// TODO: Implement this method in WEEK 3
 		
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
-
-		return null;
+		// Initialize Queue, Set & parent Map
+		Set<MapNode> visited = new HashSet<MapNode>();
+		Queue<MapNode> queue = new LinkedList<MapNode>();
+		Map<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
+		
+		// initialize pathFound boolean
+		boolean pathFound = false;
+		
+		MapNode startNode = intersections.get(start);
+		MapNode goalNode = intersections.get(goal);
+		
+		// Add start node to Queue and Set
+		queue.add(startNode);
+		visited.add(startNode);		
+		
+		while (!queue.isEmpty()) {
+			MapNode currentNode = queue.poll();
+			// Hook for visualization.  See writeup.
+			nodeSearched.accept(currentNode.getLocation());
+			
+			// break the loop and set pathFound to true if we reach to the goal
+			if (currentNode.toString().equals(goalNode.toString())) {
+				pathFound = true;
+				break;
+			}
+			
+			for (MapNode neighbor: currentNode.getNeighbors()) {
+				// Ensure visit only to non-visited nodes
+				if (!visited.contains(neighbor)) {
+					visited.add(neighbor);
+					parent.put(neighbor, currentNode);
+					queue.add(neighbor);
+				}
+			}
+			
+		}
+		
+		return getPath(startNode, goalNode, parent, pathFound);				
+	}
+	
+	/** Helper private method that constructs a path 
+	 * from start node to goal node by tracing back using 
+	 * parent Map
+	 * 
+	 * @param start
+	 * @param goal
+	 * @param parent
+	 * @param pathFound
+	 * @return path from start to goal 
+	 * 
+	 */
+	private List<GeographicPoint> getPath(MapNode start, MapNode goal, 
+			Map<MapNode, MapNode> parent, boolean pathFound) {
+		
+		if (pathFound == false) {
+			System.out.println("There is no path found from " + start + " to " + goal + ".");
+			return null;
+		}
+		
+		List<GeographicPoint> path = new LinkedList<GeographicPoint>();
+		MapNode currNode = goal;
+		
+		// backtrace a node from goal until you reach to start
+		while (true) {
+			if (currNode.toString().equals(start.toString())) {
+				break;
+			}			
+			MapNode prevNode = parent.get(currNode);
+			path.add(currNode.getLocation());
+			currNode = prevNode;			
+		}
+		
+		path.add(start.getLocation());
+		// reverse order to return a List from start to goal
+		Collections.reverse(path);
+		
+		return path;
 	}
 	
 
@@ -203,8 +337,10 @@ public class MapGraph {
 	{
 		System.out.print("Making a new map...");
 		MapGraph firstMap = new MapGraph();
+		firstMap.printGraph();
 		System.out.print("DONE. \nLoading the map...");
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", firstMap);
+		//firstMap.printGraph();
 		System.out.println("DONE.");
 		
 		// You can use this method for testing.  
