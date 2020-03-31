@@ -21,7 +21,15 @@
 ### 2. Implement Shortest path algorithm using BFS
 - Design a shortest path algorithm that performs BFS starting at start until it reaches goal and returns a list of geographic points along the shortest (unweighted) path from start to goal.
 
-#### 
+#### Implementation Results with Front-end GUI 
+##### A. Load Map and Show Intersection 
+<kbd>![Alt gif1](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif)</kbd>
+
+##### B. Show Shortest Point between stand and goal using BFS
+<kbd>![Alt gif2](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-route.gif)</kbd>
+
+##### C. Visualize BFS Implementation
+<kbd>![Alt gif2](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif)</kbd>
 
 
 #### code
