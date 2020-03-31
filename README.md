@@ -13,4 +13,16 @@
 
 ## Implementation
 
-### 1. Implement basic graphs for real transportation data
+### 1. Design and Implement MapGraph Class for real street data
+
+- Design and implement a set of classes that will represent the graph structure that stores the street data and to use these classes to implement MapGraph.
+- MapGraph is a directed graph that represents the road connections between intersections. Vertices in a MapGraph are GeographicPoints (latitude, longitude pairs) that correspond to intersections or dead ends between roads, while the edges are the road segments between these intersections.
+
+### 2. Implement Shortest path algorithm using BFS
+- Design a shortest path algorithm that performs BFS starting at start until it reaches goal and returns a list of geographic points along the shortest (unweighted) path from start to goal.
+
+#### 
+
+
+#### code
+- 
