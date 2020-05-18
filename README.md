@@ -15,25 +15,22 @@ Additionally, a runnable **JavaFX** program which will help to test and demonstr
 - Implement graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A\* Search**. 
 - Work with real-world geographic road data and visualize routes from start point and end point. 
 
-## Implementation
+## Implementation Steps
 
 ### 1. Design and Implement MapGraph Class for real street data
 
 - Design and implement a set of classes that will represent the graph structure that stores the street data and to use these classes to implement MapGraph.
 - MapGraph is a directed graph that represents the road connections between intersections. Vertices in a MapGraph are GeographicPoints (latitude, longitude pairs) that correspond to intersections or dead ends between roads, while the edges are the road segments between these intersections.
 
-### 2. Implement Shortest path algorithm using BFS
-- Design a shortest path algorithm that performs BFS starting at start until it reaches goal and returns a list of geographic points along the shortest (unweighted) path from start to goal.
-
-#### Implementation Results with Front-end GUI 
-#### A. Load Map and Show Intersection 
+#### Load Map and Show Intersection 
 <kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif" alt="gif1" width="800" border="1"/></kbd>
 
-#### B. Show Shortest Point between stand and goal using BFS
-<kbd>![Alt gif2](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-route.gif)</kbd>
+### 2. Implement Shortest path algorithm using Breadth-First Search (BFS)
+- Design a shortest path algorithm that performs BFS starting at start until it reaches goal and returns a list of geographic points along the shortest (unweighted) path from start to goal.
+- Please note that the BFS algorithm treats distance between each two intersections as 1 unit, hence it's not accuate for real life graphs. 
 
-#### C. Visualize BFS Implementation
-<kbd>![Alt gif2](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif)</kbd>
+#### Visualize BFS Implementation
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif" alt="gif2" width="800"/></kbd>
 
 #### Utility files
 - geography.GeographicPoint.java
