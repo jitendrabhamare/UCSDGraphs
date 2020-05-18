@@ -1,7 +1,9 @@
 # UCSDGraphs
 
 ## Introduction
-The project is part of MOOC course 'Advanced Data Structures' under Specialization 'Object Oriented Java Programming: Data Structures and Beyond' offered by University of California, San Diego. The aim of the project is to build a map application with the ability to provide and visualize routes from one point to another in a map.
+The project is part of MOOC course **'[Advanced Data Structures in Java](https://www.coursera.org/learn/advanced-data-structures)'** under Specialization 'Object Oriented Java Programming: Data Structures and Beyond' offered by University of California, San Diego. The aim of the project is to build a map application with the ability to provide and visualize routes from one point to another in a map.
+
+GUI Application developed in the MOOC Course and starter code authored by UCSD MOOC Team: Mia Minnes, Christine Alvarado, Leo Porter, Alec Brickner and Adam Setters.
 
 ## Overview
 - The code being developed is what’s called **“back-end”** code, in that I worked with road data, but not directly with the front-end interface. The ideas is to implement **Graph Algorithms** that fit firmly into this back-end functionality. However, a front end map interface that uses the Google Maps API is provided. 
