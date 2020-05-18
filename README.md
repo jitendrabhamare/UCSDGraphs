@@ -3,8 +3,8 @@
 ## Introduction
 The project is part of MOOC course '[Advanced Data Structures in Java](https://www.coursera.org/learn/advanced-data-structures)' under Specialization **'Object Oriented Java Programming: Data Structures and Beyond'** offered by University of California, San Diego. The aim of the project is to build a map application with the ability to provide and visualize routes from one point to another in a map.
 
-GUI Application developed in the MOOC Course and starter code authored by UCSD MOOC Team: Mia Minnes, Christine Alvarado, Leo Porter, Alec Brickner and Adam Setters.
-Additionally, a runnable JavaFX program which will help to test and demonstrate the implementations.
+GUI Application developed in the MOOC Course and starter code authored by UCSD MOOC Team: Mia Minnes, Christine Alvarado, Leo Porter, Alec Brickner and Adam Setters.<br/>
+Additionally, a runnable **JavaFX** program which will help to test and demonstrate the implementations.
 
 ## Overview
 - The code being developed is what’s called **“back-end”** code, in that I worked with road data, but not directly with the front-end interface. The ideas is to implement **Graph Algorithms** that fit firmly into this back-end functionality. However, a front end map interface that uses the Google Maps API is provided. 
@@ -44,3 +44,14 @@ Additionally, a runnable JavaFX program which will help to test and demonstrate 
 - [src/roadgraph/MapNode.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapNode.java)
 - [src/roadgraph/MapEdge.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapEdge.java)
 - [src/roadgraph/MapGraph.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapGraph.java)
+
+#### Setup
+Importing Project into **eclipse**:
+
+Create a new Java Project in your workspace<br/>
+Import the starter files:
+File -> Import -> Select "File System" -> Next -> Browse and set root directory to folder contents of zip were extracted to -> Finish
+
+Feel free to use another IDE or manually compile and run your programs.
+
+If you need help, google is your friend.
