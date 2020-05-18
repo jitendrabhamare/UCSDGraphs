@@ -8,9 +8,9 @@ The project is part of MOOC course 'Advanced Data Structures' under Specializati
 - The project really looks and feels like Google Maps, However it is quite primitive compared to the real Google Maps!
 
 ### Project learning outcomes
-- Design classes to implement a graph in Java
-- Implement basic graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A\* Search**.
-- Work with real-world geographic road data
+- Architect and design classes to implement a graph in Java.
+- Implement graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A\* Search**. 
+- Work with real-world geographic road data and visualize routes from start point and end point. 
 
 
 ## Implementation
