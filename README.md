@@ -32,24 +32,30 @@ Additionally, a runnable **JavaFX** program which will help to test and demonstr
 #### Visualize BFS Implementation
 <kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif" alt="gif2" width="800"/></kbd>
 
-### 2. Implement Dijkstra's Shortest Path Algorithm 
+### 2. Implement Dijkstra's Shortest Path Algorithm
+- Augment classes to support the execution of Dijkstra's algorithm to find the shortest path through a weighted graph.
+- Design Dijkstra's shortest path algorithm that returns a list of geographic points along the shortest (weighted) path from start to goal.
 
 #### Visualize Dijkstra's Algorithm Implementation
 <kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/dijkstra-visualize.gif" alt="dijkstra-gif" width="800"/></kbd>
 
 ### 4. Implement A* Shortest Path Algorithm
+- Add support execution of the A Star Search algorithm which optimizes search.
+- Design A* shortest path algorithm that returns a list of geographic points along the shortest (weighted) path from start to goal by keeping track of actual distance from the start node (just as in Dijkstra) but also keep a predicted distance (actual distance + straight line distance) which will be used by the priority queue to prioritize "better" paths.
+
 #### Visualize A* Algorithm Implementation
 <kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/astar2-visualize.gif" alt="astar-gif" width="800"/></kbd>
 
-#### Utility files
-- geography.GeographicPoint.java
-- geography.RoadSegment.java
-- util.GraphLoader.java
-
-#### code
+#### Code
 - [src/roadgraph/MapNode.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapNode.java)
 - [src/roadgraph/MapEdge.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapEdge.java)
 - [src/roadgraph/MapGraph.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapGraph.java)
+
+
+#### Provided Utility files
+- [GeographicPoint.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/GeographicPoint.java)
+- [RoadSegment.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/RoadSegment.java)
+- [GraphLoader.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/util/GraphLoader.java)
 
 #### Setup
 Importing Project into **eclipse**:
