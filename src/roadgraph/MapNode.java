@@ -12,7 +12,7 @@ import geography.GeographicPoint;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MapNode {
+public class MapNode implements Comparable<MapNode>{
 
 	// -----------------------------------------------------
 	//			Member Variables
@@ -20,6 +20,9 @@ public class MapNode {
 	private GeographicPoint location;
 	private List<MapEdge> roadList;
 	private List<MapNode> neighbors;
+	private Double distance;
+	private Double heuristicCost;
+	private boolean astarFlag;
 	
 	// -----------------------------------------------------
 	//			Constructors
@@ -31,6 +34,9 @@ public class MapNode {
 		this.location = null;
 		this.roadList = new ArrayList<MapEdge>();
 		this.neighbors = new ArrayList<MapNode>();
+		this.distance = null;
+		this.heuristicCost = null;
+		this.astarFlag = false;
 	}
 	
 	/** Create a MapNode with a given location
@@ -40,6 +46,9 @@ public class MapNode {
 		this.location = loc;
 		this.roadList = new ArrayList<MapEdge>();
 		this.neighbors = new ArrayList<MapNode>();
+		this.distance = null;
+		this.heuristicCost = null;
+		this.astarFlag = false;		
 	}
 	
 	// -----------------------------------------------------
@@ -67,6 +76,38 @@ public class MapNode {
 		return this.neighbors;
 	}
 	
+	/** Getter for a distance of the MapNode 
+	 * @return distance 
+	 */
+	public Double getDistance() {
+		return this.distance;
+	}
+	
+	/** Setter for a distance of the MapNode 
+	 * @param Double distanceVal 
+	 */
+	public void setDistance(Double DistVal) {
+		this.distance = DistVal;
+	}
+	
+	/** Getter for a heuristicCost of the MapNode 
+	 * @return distance 
+	 */
+	public Double getHCost() {
+		return this.heuristicCost;
+	}
+	
+	/** Setter for a distance of the MapNode 
+	 * @param Double distanceVal 
+	 */
+	public void setHCost(MapNode other) {
+		this.heuristicCost = this.location.distance(other.getLocation());		
+	}
+	
+	public void setAstar() {
+		this.astarFlag = true;
+	}
+	
 	/** Print MapNode Attributes
 	 * @return s - information of MapNode	  
 	 */
@@ -78,6 +119,18 @@ public class MapNode {
 		}
 		
 		return s;
+	}
+	
+	@Override
+    public int compareTo(MapNode other) {
+		if (this.astarFlag) {
+			Double this_cost = this.getHCost() + this.getDistance();
+			Double other_cost = other.getHCost() + other.getDistance();
+			
+			return this_cost.compareTo(other_cost);			
+		}
+		
+		return this.getDistance().compareTo(other.getDistance());
 	}
 	
 }

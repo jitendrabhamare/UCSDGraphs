@@ -25,7 +25,7 @@ public class MapEdge {
 	private GeographicPoint end;
 	private String name;
 	private String type;
-	private double distance;
+	private double length;
 	
 	// -----------------------------------------------------
 	//			Constructors
@@ -40,7 +40,7 @@ public class MapEdge {
 	 * @param start
 	 * @param end
 	 * @param name 
-	 * @param distance 
+	 * @param length 
 	 */
 	public MapEdge(GeographicPoint end1, GeographicPoint end2, String roadName, 
 			String roadType, double length) {
@@ -48,7 +48,7 @@ public class MapEdge {
 		this.end = end2;
 		this.name = roadName;
 		this.type = roadType;
-		this.distance = length;		
+		this.length = length;		
 	}
 	
 	// -----------------------------------------------------
@@ -86,8 +86,8 @@ public class MapEdge {
 	/** Getter for distance b/w stand and end point
 	 * @return distance 
 	 *  */
-	public double getDistance() {
-		return this.distance;
+	public double getLength() {
+		return this.length;
 	}
 	
 	/** Print MapEdge Attributes
@@ -99,7 +99,7 @@ public class MapEdge {
 		s += "\tendPoint: " + getEndPoint() + ",\n";
 		s += "\tStreetName: " + getName() + ",\n";
 		s += "\tStreetType: " + getType() + ",\n";
-		s += "\tdistance: " + getDistance();
+		s += "\tlength: " + getLength();
 		s += "\n";
 		
 		return s;

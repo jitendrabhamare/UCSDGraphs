@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.PriorityQueue;
 import java.util.function.Consumer;
 
 import geography.GeographicPoint;
@@ -262,6 +263,7 @@ public class MapGraph {
 		// reverse order to return a List from start to goal
 		Collections.reverse(path);
 		
+		System.out.println("Path: " + path);
 		return path;
 	}
 	
@@ -293,10 +295,65 @@ public class MapGraph {
 	{
 		// TODO: Implement this method in WEEK 4
 
-		// Hook for visualization.  See writeup.
-		//nodeSearched.accept(next.getLocation());
+		// Initialize PriorityQueue, Set, parent Map & distance Map
+		HashSet<MapNode> visited = new HashSet<MapNode>();
+		PriorityQueue<MapNode> priorityQueue = new PriorityQueue<>();
+		HashMap<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
+		//HashMap<MapNode, Double> distances = new HashMap<MapNode, Double>(); 
 		
-		return null;
+		Integer inf = Integer.MAX_VALUE;
+		boolean pathFound = false;
+		MapNode startNode = intersections.get(start);
+		MapNode goalNode = intersections.get(goal);
+		
+		// Set all distances to be inf for all intersections
+		for (GeographicPoint location: intersections.keySet()) {
+			//distances.put(intersections.get(location), inf.doubleValue());
+			intersections.get(location).setDistance(inf.doubleValue());
+		}
+		
+		// Set distance of start node to 0 and enqueue it
+		intersections.get(start).setDistance(0.0);
+		priorityQueue.add(startNode);
+		
+		int count = 0;
+		
+		while (!priorityQueue.isEmpty()) {
+			//dequeue node from front of queue
+			MapNode currentNode = priorityQueue.poll();
+			count++;
+			// Hook for visualization.  See writeup.
+			nodeSearched.accept(currentNode.getLocation());
+			
+			if (!visited.contains(currentNode)) {
+				visited.add(currentNode);
+				
+				//System.out.println("Node-visited: " + currentNode.getLocation());
+				if (currentNode.toString().equals(goalNode.toString())) {
+					pathFound = true;
+					break;
+				}
+				
+				for (MapEdge road: currentNode.getRoadList()) {					
+					MapNode neighbor = intersections.get(road.getEndPoint());
+					// Ensure visit only to non-visited nodes
+					if (!visited.contains(neighbor)) {
+						Double minDist = currentNode.getDistance() + road.getLength();
+						if (minDist < neighbor.getDistance()) {
+							// Update neighbor's distance
+							neighbor.setDistance(minDist);							
+							parent.put(neighbor, currentNode);
+							// enqueue neighbor in priorityQueue
+							priorityQueue.add(neighbor);
+						}
+						
+					}
+				}				
+			}
+			
+		}		
+		System.out.println("Dijkstra total No. of Node-visited: " + count);
+		return getPath(startNode, goalNode, parent, pathFound);		
 	}
 
 	/** Find the path from start to goal using A-Star search
@@ -327,8 +384,74 @@ public class MapGraph {
 		
 		// Hook for visualization.  See writeup.
 		//nodeSearched.accept(next.getLocation());
+		// Initialize PriorityQueue, Set, parent Map & distance Map
+		HashSet<MapNode> visited = new HashSet<MapNode>();
+		PriorityQueue<MapNode> priorityQueue = new PriorityQueue<>();
+		HashMap<MapNode, MapNode> parent = new HashMap<MapNode, MapNode>();
+		 
+		Integer inf = Integer.MAX_VALUE;
+		boolean pathFound = false;
+		MapNode startNode = intersections.get(start);
+		MapNode goalNode = intersections.get(goal);
+				
+		// Set all distances and Heuristic Costs to be inf for all intersections
+		for (GeographicPoint location: intersections.keySet()) {
+			//distances.put(intersections.get(location), inf.doubleValue());
+			intersections.get(location).setDistance(inf.doubleValue());
+			// Add HCost for each node from Goal & activate astarFlag to modify compareTo 
+			// function of MapNode such that priorityQueue entry will be based on HCost+GCost
+			intersections.get(location).setHCost(goalNode);
+			intersections.get(location).setAstar();
+		}
 		
-		return null;
+		// Set distance of start node to 0 and enqueue it  
+		intersections.get(start).setDistance(0.0);
+		priorityQueue.add(startNode);	
+		
+		int count = 0;
+				
+		while (!priorityQueue.isEmpty()) {
+			//dequeue node from front of queue
+			MapNode currentNode = priorityQueue.poll();
+			count++;
+			// Hook for visualization.  See writeup.
+			nodeSearched.accept(currentNode.getLocation());
+					
+			if (!visited.contains(currentNode)) {
+				visited.add(currentNode);
+				
+				//System.out.println("Node-visited: " + currentNode.getLocation());
+				if (currentNode.toString().equals(goalNode.toString())) {
+					pathFound = true;
+					break;
+				}
+						
+				for (MapEdge road: currentNode.getRoadList()) {					
+					MapNode neighbor = intersections.get(road.getEndPoint());
+					System.out.println("Road-type: " + road.getType());
+					// Ensure visit only to non-visited nodes
+					if (!visited.contains(neighbor)) {
+						
+						Double minDist = currentNode.getDistance() + road.getLength();
+						
+						if (minDist < neighbor.getDistance()) {
+							// Update neighbor's distance
+							neighbor.setDistance(minDist);							
+							parent.put(neighbor, currentNode);
+							// enqueue neighbor in priorityQueue
+							priorityQueue.add(neighbor);
+						}
+								
+					}
+				}				
+			}
+					
+		}	
+		
+		System.out.println("Astar total No. of Node-visited: " + count);
+				
+		return getPath(startNode, goalNode, parent, pathFound);		
+		
 	}
 
 	
@@ -350,6 +473,7 @@ public class MapGraph {
 		 * the Week 3 End of Week Quiz, EVEN IF you score 100% on the 
 		 * programming assignment.
 		 */
+		
 		/*
 		MapGraph simpleTestMap = new MapGraph();
 		GraphLoader.loadRoadMap("data/testdata/simpletest.map", simpleTestMap);
@@ -383,7 +507,7 @@ public class MapGraph {
 		
 		
 		/* Use this code in Week 3 End of Week Quiz */
-		/*MapGraph theMap = new MapGraph();
+		MapGraph theMap = new MapGraph();
 		System.out.print("DONE. \nLoading the map...");
 		GraphLoader.loadRoadMap("data/maps/utc.map", theMap);
 		System.out.println("DONE.");
@@ -395,7 +519,7 @@ public class MapGraph {
 		List<GeographicPoint> route = theMap.dijkstra(start,end);
 		List<GeographicPoint> route2 = theMap.aStarSearch(start,end);
 
-		*/
+		
 		
 	}
 	
