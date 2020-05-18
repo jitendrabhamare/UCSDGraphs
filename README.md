@@ -27,7 +27,7 @@ Additionally, a runnable **JavaFX** program which will help to test and demonstr
 
 #### Implementation Results with Front-end GUI 
 #### A. Load Map and Show Intersection 
-<kbd>![Alt gif1](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif)</kbd>
+<img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif" alt="gif1" width="800" border="1"/>
 
 #### B. Show Shortest Point between stand and goal using BFS
 <kbd>![Alt gif2](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-route.gif)</kbd>
