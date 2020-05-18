@@ -32,6 +32,15 @@ Additionally, a runnable **JavaFX** program which will help to test and demonstr
 #### Visualize BFS Implementation
 <kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif" alt="gif2" width="800"/></kbd>
 
+### 2. Implement Dijkstra's Shortest Path Algorithm 
+
+#### Visualize Dijkstra's Algorithm Implementation
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/dijkstra-visualize.gif" alt="dijkstra-gif" width="800"/></kbd>
+
+### 4. Implement A* Shortest Path Algorithm
+#### Visualize A* Algorithm Implementation
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/astar2-visualize.gif" alt="astar-gif" width="800"/></kbd>
+
 #### Utility files
 - geography.GeographicPoint.java
 - geography.RoadSegment.java
