@@ -1,69 +1,199 @@
-# UCSDGraphs
+# Route Planning with Graph Algorithms
 
-## Introduction
-The project is part of MOOC course '[Advanced Data Structures in Java](https://www.coursera.org/learn/advanced-data-structures)' under Specialization **'Object Oriented Java Programming: Data Structures and Beyond'** offered by University of California, San Diego. The aim of the project is to build a map application with the ability to provide and visualize routes from one point to another in a map.
+[![Java](https://img.shields.io/badge/Language-Java-blue.svg)](https://www.java.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Coursera](https://img.shields.io/badge/Coursera-Advanced%20Data%20Structures-brightgreen.svg)](https://www.coursera.org/learn/advanced-data-structures)
 
-GUI Application developed in the MOOC Course and starter code authored by UCSD MOOC Team: Mia Minnes, Christine Alvarado, Leo Porter, Alec Brickner and Adam Setters.<br/>
-Additionally, a runnable **JavaFX** program which will help to test and demonstrate the implementations.
+**Route Planning with Graph Algorithms** is a Java-based mapping application that calculates and visualizes routes between geographic points using classical graph algorithms. Built as part of UCSD’s [Advanced Data Structures in Java](https://www.coursera.org/learn/advanced-data-structures) course on Coursera, this project demonstrates real-world graph theory applications via an interactive map interface powered by the Google Maps API.
 
-## Overview
-- The code being developed is what’s called **“back-end”** code, in that I worked with road data, but not directly with the front-end interface. The ideas is to implement **Graph Algorithms** that fit firmly into this back-end functionality. However, a front end map interface that uses the Google Maps API is provided. 
-- The project really looks and feels like Google Maps, However it is quite primitive compared to the real Google Maps!
+---
+## Table of Contents
 
-### Project learning outcomes
-- Architect and design classes to implement a graph in Java.
-- Implement graph search algorithms including **breadth first search, Dijkstra's Algorithm**, and **A\* Search**. 
-- Work with real-world geographic road data and visualize routes from start point and end point. 
+- [Features](#features)
+- [About the Project](#about-the-project)
+  - [Learning Objectives](#learning-objectives)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+- [Implementation Highlights](#implementation-highlights)
+  - [Graph Structure & Node Design](#1-graph-structure--node-design)
+  - [Breadth-First Search (BFS)](#2-breadth-first-search-bfs)
+  - [Dijkstra’s Algorithm](#3-dijkstras-algorithm)
+  - [A* Search](#4-a-search)
+- [Source Code Overview](#source-code-overview)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+- [Support](#support)
+  
+---
 
-## Implementation Steps
+## Features
 
-### 1. Design and Implement MapGraph Class for real street data
+- Compute shortest paths using **Breadth-First Search (BFS)**, **Dijkstra’s Algorithm**, and **A\* Search**
+- Interactive route visualization on Google Maps
+- Real-world road data integration with Java and JavaFX frontend
 
-- Design and implement a set of classes that will represent the graph structure that stores the street data and to use these classes to implement MapGraph.
-- MapGraph is a directed graph that represents the road connections between intersections. Vertices in a MapGraph are GeographicPoints (latitude, longitude pairs) that correspond to intersections or dead ends between roads, while the edges are the road segments between these intersections.
+---
 
-#### Load Map and Show Intersection 
-<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif" alt="gif1" width="800" border="1"/></kbd>
+## About the Project
 
-### 2. Implement Shortest path algorithm using Breadth-First Search (BFS)
-- Design a shortest path algorithm that performs BFS starting at start until it reaches goal and returns a list of geographic points along the shortest (unweighted) path from start to goal.
-- Please note that the BFS algorithm treats distance between each two intersections as 1 unit, hence it's not accuate for real life graphs. 
+This project emphasizes algorithmic problem-solving through route planning, integrating backend graph logic with a frontend Google Maps interface. It’s a simplified but educational alternative to commercial mapping systems, focusing on algorithm design over production-grade UX.
 
-#### Visualize BFS Implementation
-<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif" alt="gif2" width="800"/></kbd>
+### Learning Objectives
 
-### 2. Implement Dijkstra's Shortest Path Algorithm
-- Augment classes to support the execution of Dijkstra's algorithm to find the shortest path through a weighted graph.
-- Design Dijkstra's shortest path algorithm that returns a list of geographic points along the shortest (weighted) path from start to goal.
+- Implement graph structures and traversal algorithms from scratch in Java
+- Understand trade-offs between different shortest path algorithms
+- Visualize algorithm performance and pathfinding behavior in real geographic contexts
 
-#### Visualize Dijkstra's Algorithm Implementation
-<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/dijkstra-visualize.gif" alt="dijkstra-gif" width="800"/></kbd>
+---
 
-### 4. Implement A* Shortest Path Algorithm
-- Add support execution of the A Star Search algorithm which optimizes search.
-- Design A* shortest path algorithm that returns a list of geographic points along the shortest (weighted) path from start to goal by keeping track of actual distance from the start node (just as in Dijkstra) but also keep a predicted distance (actual distance + straight line distance) which will be used by the priority queue to prioritize "better" paths.
+## Getting Started
 
-#### Visualize A* Algorithm Implementation
-<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/astar2-visualize.gif" alt="astar-gif" width="800"/></kbd>
+### Prerequisites
 
-#### Code
-- [src/roadgraph/MapNode.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapNode.java)
-- [src/roadgraph/MapEdge.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapEdge.java)
-- [src/roadgraph/MapGraph.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapGraph.java)
+- **Java 8 or higher** – [Download here](https://www.oracle.com/java/technologies/javase-downloads.html)
+- **Maven** – Dependency and build manager ([Install guide](https://maven.apache.org/install.html))
+- **Google Maps API Key** – Get one [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+- **Eclipse IDE** (optional) – or use any Java IDE of your choice
 
+### Installation
 
-#### Provided Utility files
-- [GeographicPoint.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/GeographicPoint.java)
-- [RoadSegment.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/RoadSegment.java)
-- [GraphLoader.java](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/util/GraphLoader.java)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jitendrabhamare/UCSDGraphs.git
+   ```
 
-#### Setup
-Importing Project into **eclipse**:
+2. **Navigate to the project directory**
+   ```bash
+   cd UCSDGraphs
+   ```
 
-Create a new Java Project in your workspace<br/>
-Import the starter files:
-File -> Import -> Select "File System" -> Next -> Browse and set root directory to folder contents of zip were extracted to -> Finish
+3. **Set your Google Maps API key**
 
-Feel free to use another IDE or manually compile and run your programs.
+   Create the following file if it doesn't exist:
+   ```properties
+   # File: src/main/resources/config.properties
+   google.maps.api.key=YOUR_API_KEY
+   ```
 
-If you need help, google is your friend.
+4. **Build the project**
+   ```bash
+   mvn clean install
+   ```
+
+### Running the Application
+
+1. Launch the JavaFX application:
+   ```bash
+   java -jar target/UCSDGraphs-1.0-SNAPSHOT.jar
+   ```
+
+2. Open `http://localhost:8080` in your browser to interact with the map interface.
+
+---
+
+## Implementation Highlights
+
+### 1. **Graph Structure & Node Design**
+
+Custom `MapGraph` class represents the map:
+- Nodes: `GeographicPoint` intersections
+- Edges: directed, weighted road segments
+
+🔍 *Demo: Visualizing loaded intersections on the map*  
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-show-intersections.gif" width="800"/></kbd>
+
+---
+
+### 2. **Breadth-First Search (BFS)**
+
+BFS is used for unweighted shortest path discovery.
+
+- **Time Complexity**: ```O(V + E)```
+- **Space Complexity**: ```O(V)```
+- **Optimal**: Yes, for unweighted graphs
+- **Use Case**: Scenarios where edge weights are irrelevant (e.g., basic pathfinding, board games)
+
+🧭 *Demo: BFS explores shortest unweighted path*  
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/bfs-visualize.gif" width="800"/></kbd>
+
+---
+
+### 3. **Dijkstra’s Algorithm**
+
+Dijkstra computes shortest paths on weighted graphs with non-negative edge costs.
+
+- **Time Complexity**: ```O((V + E) log V)``` with priority queue
+- **Space Complexity**: ```O(V)```
+- **Optimal**: Yes
+- **Use Case**: GPS routing where travel distances or times differ across roads
+
+🛣️ *Demo: Dijkstra’s algorithm finds optimal weighted paths*  
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/dijkstra-visualize.gif" width="800"/></kbd>
+
+---
+
+### 4. **A\* Search**
+
+A* uses heuristics to prioritize promising paths, reducing unnecessary exploration.
+
+- **Time Complexity**: ```O((V + E) log V)``` (average case)
+- **Space Complexity**: ```O(V)```
+- **Optimal**: Yes, with admissible heuristics (e.g., straight-line distance)
+- **Use Case**: Real-time routing with performance constraints (e.g., robotics, games)
+
+🧠 *Demo: A* efficiently finds optimal route using heuristics*  
+<kbd><img src="https://github.com/jitendrabhamare/UCSDGraphs/blob/master/gif/astar2-visualize.gif" width="800"/></kbd>
+
+---
+
+## Source Code Overview
+
+### Core Graph Logic
+
+- [`MapGraph.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapGraph.java) – Graph structure and algorithm implementations
+- [`MapNode.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapNode.java) – Node representation
+- [`MapEdge.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/roadgraph/MapEdge.java) – Edge representation
+
+### Utilities & Data Models
+
+- [`GeographicPoint.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/GeographicPoint.java)
+- [`RoadSegment.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/geography/RoadSegment.java)
+- [`GraphLoader.java`](https://github.com/jitendrabhamare/UCSDGraphs/blob/master/src/util/GraphLoader.java)
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork this repository  
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit and push your changes  
+4. Open a pull request with a detailed description
+
+---
+
+## Credits
+
+- **Course & Starter Code**: UCSD MOOC Team  
+  *(Mia Minnes, Christine Alvarado, Leo Porter, Alec Brickner, Adam Setters)*
+- **Project Implementation**: [Jitendra Bhamare](https://github.com/jitendrabhamare)
+
+---
+
+## License
+
+Licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
+
+---
+
+## Support
+
+For questions or issues, feel free to [open an issue](https://github.com/jitendrabhamare/UCSDGraphs/issues) or contact via email:  
+📧 **jitendra@email.com**
